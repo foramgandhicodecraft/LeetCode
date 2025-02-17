@@ -2,8 +2,8 @@
 
 bool isAnagram(char* s, char* t) {
     // Create two arrays to store the character counts
-    int anagram[CHAR_COUNT] = {0};
-    int anagram2[CHAR_COUNT] = {0};
+    int anagram[CHAR_COUNT];
+    int anagram2[CHAR_COUNT];
 
     // If lengths of strings are not equal, they cannot be anagrams
     if (strlen(s) != strlen(t)) {
