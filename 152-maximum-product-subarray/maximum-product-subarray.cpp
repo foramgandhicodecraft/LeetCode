@@ -10,15 +10,10 @@ public:
             int temp_min = current_min;
 
             current_max = max(temp_max*nums[i], max(nums[i], temp_min*nums[i]));
+            // negative*negative can make a larger positive
             current_min = min(nums[i], min(temp_min*nums[i], temp_max*nums[i]));
-            cout<<current_max<<endl;
-            cout<<current_min<<endl;
-            // if (current_max < current_min*nums[i]){
-            //     global_max = max(global_max, current_min*nums[i]);
-            // }
 
             global_max = max(global_max, current_max);
-            cout<<global_max<<endl;
         }
 
         return global_max;
