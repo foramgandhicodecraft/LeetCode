@@ -1,23 +1,26 @@
 class Solution {
 public:
     string makeFancyString(string s) {
-        string result;
-        result += s[0];
-        int count = 1;
+        string ans;
 
-        for (int i = 1; i < s.size(); i++){
-            if (s[i] == s[i - 1]){
+        int i = 0;
+        int j = i;
+
+        while (i < s.size()){
+            
+            int count = 0;
+
+            while (s[j] == s[i]){
                 count++;
-            }
-            else{
-                count = 1;
-            }
+                j++;
 
-            if (count < 3){
-                result += s[i];
+                if (count < 3){
+                    ans += s[i];
+                }
             }
+            i= j;
         }
 
-        return result;
+        return ans;
     }
 };
