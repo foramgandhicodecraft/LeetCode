@@ -2,13 +2,14 @@ class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
         map<int,int>m;
-        for (int i = 0; i < nums.size(); i++){
-            m[nums[i]]++;
+
+        for (auto num:nums){
+            m[num]++;
         }
 
         priority_queue<pair<int,int>>max_heap;
 
-        for (auto [num, frequency] : m){
+        for (auto [num, frequency]:m){
             max_heap.push({frequency,num});
         }
 
