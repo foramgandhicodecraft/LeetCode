@@ -9,8 +9,8 @@ public:
 
         priority_queue<pair<int,int>>max_heap;
 
-        for (auto [num, frequency]:m){
-            max_heap.push({frequency,num});
+        for (auto key:m){
+            max_heap.push({key.second, key.first});
         }
 
         vector<int>result;
