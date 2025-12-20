@@ -4,25 +4,23 @@ public:
         if (nums.empty()){
             return 0;
         }
-        unordered_set<int>setNums(nums.begin(),nums.end());
         int longest_streak = 0;
-        int currentNums;
-        int current_streak;
+        int current_streak = 0;
+        set<int>s(nums.begin(), nums.end());
+        int current_num = nums[0];
 
-        for (int i:setNums){
-            if (setNums.find(i-1) == setNums.end()){
-                currentNums = i;
+        for (int num:s){
+            if (s.find(num-1) == s.end()){
                 current_streak = 1;
+                current_num = num;
+            }
+            while (s.find(current_num+1) != s.end()){
+                current_streak++;
+                current_num++;
+            }
 
-                while(setNums.find(currentNums+1) != setNums.end()){
-                   currentNums++;
-                   current_streak++;
-                }
-
-                if (current_streak > longest_streak){
-                   longest_streak = current_streak;
-                }
-
+            if (current_streak > longest_streak){
+                longest_streak = current_streak;
             }
         }
 
