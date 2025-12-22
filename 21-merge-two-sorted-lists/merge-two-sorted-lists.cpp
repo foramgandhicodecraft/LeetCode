@@ -15,23 +15,28 @@ public:
         ListNode* current = &dummy;
 
         while (list1 != nullptr && list2 != nullptr){
-            if (list1->val <= list2->val){
+            if (list1->val < list2->val){
                 current->next = list1;
                 list1 = list1->next;
                 current = current->next;
             }
-            else{
+            else {
                 current->next = list2;
                 list2 = list2->next;
                 current = current->next;
             }
         }
 
-        if (list1 != nullptr){
+        while (list1 != nullptr){
             current->next = list1;
+            list1 = list1->next;
+            current = current->next;
         }
-        else{
+
+        if (list2 != nullptr){
             current->next = list2;
+            list2 = list2->next;
+            current = current->next;
         }
 
         return dummy.next;
