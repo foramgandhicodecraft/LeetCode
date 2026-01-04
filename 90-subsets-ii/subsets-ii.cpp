@@ -1,23 +1,23 @@
 class Solution {
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        vector<vector<int>>ans;
         vector<int>ds;
+        vector<vector<int>>ans;
         sort(nums.begin(), nums.end());
-        subset(0, nums, ds, ans);
+        int n = nums.size();
+        subset(ans, ds, 0, n, nums);
         return ans;
     }
 
-private:
-   void subset(int index, vector<int>nums, vector<int>ds, vector<vector<int>>&ans){
-    ans.push_back(ds);
+    void subset (vector<vector<int>>&ans, vector<int>ds, int index, int n, vector<int>nums){
+        ans.push_back(ds);
 
-    for (int i = index; i < nums.size(); i++){
-        if (i != index && nums[i] == nums[i-1])  continue;
+        for (int i = index; i < n; i++){
+            if (i != index && nums[i] == nums[i-1]) continue;
 
-        ds.push_back(nums[i]);
-        subset(i+1,nums, ds, ans);
-        ds.pop_back();
+            ds.push_back(nums[i]);
+            subset(ans, ds, i+1, n, nums);
+            ds.pop_back();
+        }
     }
-   }
 };
