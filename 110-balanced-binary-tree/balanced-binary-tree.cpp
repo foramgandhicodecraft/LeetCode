@@ -12,26 +12,32 @@
 class Solution {
 public:
     bool isBalanced(TreeNode* root) {
-        int ans = balanced(root);
+        int ans = check(root);
         if (ans == -1)
           return false;
-        return true;
+        else
+          return true;
     }
 
-private:
-    int balanced (TreeNode* root){
-        if (root == NULL)
-          return 0;
+    int check (TreeNode* root){
 
-        int lh = balanced(root->left);
-        // if any subtree is unbalanced, the node will also be unbalanced
-        if (lh == -1) return -1;
-        int rh = balanced(root->right);
-        if (rh == -1) return -1;
+        if (root == nullptr){
+            return 0;
+        }
 
-        if (abs(lh - rh) > 1)
-          return -1;
+        int lh = check(root->left);
+        if (lh == -1){
+            return -1;
+        }
+        int rh = check(root->right);
+        if (rh == -1){
+            return -1;
+        }
 
-        return 1+max(lh,rh);
+        if (abs(lh-rh) > 1){
+            return -1;
+        }
+
+        return max(lh,rh)+1;
     }
 };
