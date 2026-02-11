@@ -1,30 +1,27 @@
 class Solution {
 public:
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        vector<vector<int>>ans;
+    vector<vector<int>> combinationSum(vector<int>& nums, int target) {
         vector<int>ds;
-        combination(0, target, ds, candidates, ans);
+        vector<vector<int>>ans;
+        sum(0, nums, target, ds, ans);
         return ans;
     }
 
-private:
-    void combination(int index, int target, vector<int>ds, vector<int>&arr, vector<vector<int>>& ans){
-        if (index == arr.size()){
-            if (target == 0)
-              ans.push_back(ds);
-            // always return back to carry forward the right part of the recursion
+    void sum(int index, vector<int>&nums, int target, vector<int>ds, vector<vector<int>>&ans){
+        if (index == nums.size()){
+            if (target == 0){
+                ans.push_back(ds);
+            }
             return;
         }
 
-        //pick up the element
-        if (arr[index] <= target){
-            ds.push_back(arr[index]);
-            combination(index, target-arr[index], ds, arr, ans);
-            // to remove the last element from ds as it needs to be removed for the case which does not take the element at arr[index]
+        // pick th element
+        if (nums[index] <= target){
+            ds.push_back(nums[index]);
+            sum(index, nums, target-nums[index], ds, ans);
             ds.pop_back();
         }
 
-        // do not pick the element
-        combination(index+1, target, ds, arr, ans);
+        sum(index+1, nums, target, ds, ans);
     }
 };
