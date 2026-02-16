@@ -27,9 +27,9 @@ public:
 
         int result = 0;
         for (int i = 0; i < 32; i++){
-            int curr = n&1;
-            result = (result<<1) | curr;
-            n = n>>1;
+            int curr = n&1; // get
+            result = (result<<1) | curr; // left shift result and make space for LSB
+            n = n>>1; //right shift n
         }
 
         return result;
