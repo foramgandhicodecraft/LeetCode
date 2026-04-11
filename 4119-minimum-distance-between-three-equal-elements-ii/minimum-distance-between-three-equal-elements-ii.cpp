@@ -14,16 +14,11 @@ public:
 
         for (int i = 0; i < n; i++){
             m[nums[i]].push_back(i);
-            if (m[nums[i]].size() == 3){
+            if (m[nums[i]].size() >= 3){
                 direction = true;
-                n1 = m[nums[i]][0];
-                n2 = i;
-                num = 2*(n2 - n1);
-                ans = min(ans, num);
-            }
-            else if (m[nums[i]].size() > 3){
-                direction = true;
-                m[nums[i]].erase(m[nums[i]].begin());
+                if (m[nums[i]].size() > 3){
+                    m[nums[i]].erase(m[nums[i]].begin());
+                }
                 n1 = m[nums[i]][0];
                 n2 = i;
                 num = 2*(n2 - n1);
