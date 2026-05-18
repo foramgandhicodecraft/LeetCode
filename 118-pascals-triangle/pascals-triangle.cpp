@@ -3,22 +3,22 @@ public:
     vector<vector<int>> generate(int numRows) {
 
         vector<vector<int>>pascal;
-        
-        for (int row = 0; row < numRows; row++){
-            vector<int>line;
-            int res = 1;
+        int res;
 
-            for (int col = 0; col < row+1; col++){
-                if (col == 0 || col == row){
-                    line.push_back(1);
+        for (int i = 0; i < numRows; i++){
+            res = 1;
+            vector<int>row;
+            for (int j = 0; j < i+1; j++){
+                if (j == 0 || j == i){
+                    row.push_back(1);
+                } else {
+                    res = res*(i-j+1);
+                    res = floor(res/j);
+                    row.push_back(res);
                 }
-                else {
-                    res = res * ((row-col)+1);
-                    res = floor(res / col);
-                    line.push_back(res);
-                }
+                
             }
-            pascal.push_back(line);
+            pascal.push_back(row);
         }
 
         return pascal;
