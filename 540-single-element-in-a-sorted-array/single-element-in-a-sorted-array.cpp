@@ -1,30 +1,37 @@
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        int l = 0;
-        int r = nums.size()-1;
-        int ans;
+        int n = nums.size();
+        if (n == 1){
+            return nums[0];
+        }
+        if (nums[0] != nums[1]){
+            return nums[0];
+        }
+        if (nums[n-2] != nums[n-1]){
+            return nums[n-1];
+        }
 
-        while (l <= r){
-            int mid = l + (r - l) / 2;
-            if ((mid-1 < 0 || nums[mid] != nums[mid-1]) && (mid+1 > nums.size()-1 || nums[mid] != nums[mid+1])){
-                ans = nums[mid];
-                break;
-            }
-            
-            int left_length;
-            if (mid > 0 && nums[mid-1] == nums[mid]){
-                left_length = mid-1;
-            }else{
-                left_length = mid;
+        int low = 1;
+        int high = n-1;
+
+        while (low <= high){
+            int mid = low + (high-low)/2;
+
+            if ((mid+1<n && nums[mid+1] != nums[mid]) && (mid-1>=0 && nums[mid-1] != nums[mid])){
+                return nums[mid];
             }
 
-            if (left_length % 2){ //left length is odd
-               r = mid-1;
-            }else{
-                l = mid+1;
+            // check if it is the left half
+            // (even, odd)
+            if ((mid%2 == 1 && (mid-1>=0 && nums[mid-1] == nums[mid])) || (mid%2 == 0 && (mid+1<n && nums[mid+1] == nums[mid]))){
+                low = mid+1;
+            }
+            else {
+                high = mid-1;
             }
         }
-        return ans;
+
+        return 0;
     }
 };
