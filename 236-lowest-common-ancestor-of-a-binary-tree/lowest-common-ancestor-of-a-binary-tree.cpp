@@ -10,22 +10,28 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (root == NULL)
-          return NULL;
-        else if (root == p)
-          return p;
-        else if (root == q)
-          return q;
+        if (root == nullptr){
+            return nullptr;
+        }
+        if (root == p){
+            return p;
+        }
+        if (root == q){
+            return q;
+        }
 
         TreeNode* left = lowestCommonAncestor(root->left,p,q);
         TreeNode* right = lowestCommonAncestor(root->right,p,q);
 
-        if (right == NULL)
-          return left;
-        else if (left == NULL)
-          return right;
-        else //both are not null, you are at the lca
-          return root;
+        if (left == nullptr){
+            return right;
+        }
+        else if (right == nullptr){
+            return left;
+        }
+        else{
+            return root;
+        }
 
     }
 };
