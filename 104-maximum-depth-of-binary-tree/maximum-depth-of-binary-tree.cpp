@@ -12,24 +12,21 @@
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if (root == NULL)
-          return 0;
-        int depth = 0;
-        int max_depth = 0;
-        int ans = dfs(root, depth);
-        return ans+1;
+        if (root == nullptr){
+            return 0;
+        }
+
+        return depth(root);
     }
 
-private:
-    int max_depth = 0;
-    int dfs(TreeNode* root, int depth){
-        if (root!=NULL){
-        dfs(root->left, depth+1);
-        max_depth = max(max_depth, depth);}
-        if (root != NULL){
-        dfs(root->right, depth+1);
-        max_depth = max(max_depth, depth);}
+    int depth (TreeNode* root){
+        if (root == nullptr){
+            return 0;
+        }
 
-        return max_depth;
+        int lh = 1 + depth(root->left);
+        int rh = 1 + depth(root->right);
+
+        return max(lh, rh);
     }
 };
