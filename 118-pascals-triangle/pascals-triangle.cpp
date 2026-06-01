@@ -12,7 +12,6 @@ public:
                 }
                 else{
                     res = res * (row-col+1);
-                    cout<<res<<endl;
                     res = res/col;
                     level.push_back(res);
                     
