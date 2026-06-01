@@ -1,34 +1,59 @@
 class MyStack {
 public:
-    vector<int>queue;
-
+    queue<int>q1;
+    queue<int>q2;
     MyStack() {
         
     }
     
     void push(int x) {
-        queue.push_back(x);
+        q1.push(x);
     }
     
     int pop() {
-        int x;
-        x = queue[queue.size()-1];
-        queue.pop_back();
-        return x;
+        int size = q1.size();
+        int i = 0;
+        while (i < size-1){
+            q2.push(q1.front());
+            q1.pop();
+            i++;
+        }
+        int ans = q1.front();
+        q1.pop();
+        i = 0;
+        while (i < size-1){
+            q1.push(q2.front());
+            q2.pop();
+            i++;
+        }
+        return ans;
     }
     
     int top() {
-        int element = queue[queue.size()-1];
-        return element;
+        int size = q1.size();
+        int i = 0;
+        while (i < size-1){
+            q2.push(q1.front());
+            q1.pop();
+            i++;
+        }
+        int ans = q1.front();
+        q2.push(q1.front());
+        q1.pop();
+        i = 0;
+        while (i < size){
+            q1.push(q2.front());
+            q2.pop();
+            i++;
+        }
+        return ans;
     }
     
     bool empty() {
-        if (queue.size() == 0){
+        if (q1.size() == 0){
             return true;
         }
-        else{
-            return false;
-        }
+        return false;
     }
 };
 
