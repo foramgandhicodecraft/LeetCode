@@ -1,36 +1,26 @@
 class Solution {
 public:
-
-    void swap (int* a, int* b){
-        int temp = *a;
-        *a = *b;
-        *b = temp;
-    }
-
     void nextPermutation(vector<int>& nums) {
         int n = nums.size();
-        int idx = -1;
+        int i = n-2;
 
-        for (int i = n-2; i >= 0; i--){
-            if (nums[i] < nums[i+1]){
-                idx = i;
+        while (i >= 0 && nums[i] >= nums[i+1]){
+            i--;
+        }
+        if (i == -1){
+            return reverse(nums.begin(), nums.end());
+        }
+
+        for (int j = n-1; j > i; j--){
+            if (nums[j] > nums[i]){
+                int temp = nums[j];
+                nums[j] = nums[i];
+                nums[i] = temp;
                 break;
             }
         }
 
-        if (idx == -1){
-            reverse(nums.begin(), nums.end());
-            return;
-        }
-
-        for (int i = n-1; i > idx; i--){
-            if (nums[i] > nums[idx]){
-                swap(&nums[i], &nums[idx]);
-                break;
-            }
-        }
-
-        reverse(nums.begin()+idx+1, nums.end());
+        reverse(nums.begin()+i+1, nums.end());
 
     }
-};
+};  
