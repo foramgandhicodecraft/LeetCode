@@ -1,8 +1,8 @@
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
+        // transpose
         int n = matrix.size();
-
         for (int i = 0; i < n; i++){
             for (int j = i+1; j < n; j++){
                 int temp = matrix[i][j];
@@ -11,9 +11,8 @@ public:
             }
         }
 
-        for (auto &row:matrix){
+        for (auto& row:matrix){
             reverse(row.begin(), row.end());
         }
-
     }
 };
