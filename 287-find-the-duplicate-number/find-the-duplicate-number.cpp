@@ -1,21 +1,21 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
+        // floyd's cycle detection - tortoise and hare (in arrays)
         int slow = nums[0];
-        int fast = nums[0];
+        int fast = nums[nums[0]];
 
-        do {
+        while (slow != fast){
             slow = nums[slow];
             fast = nums[nums[fast]];
-        } while (slow != fast);
+        }
 
-        fast = nums[0];
-
+        fast = 0;
         while (slow != fast) {
-            fast = nums[fast];
             slow = nums[slow];
-        } 
+            fast = nums[fast];
+        }
 
-        return slow;
+        return fast;
     }
 };
