@@ -13,29 +13,27 @@ public:
                 if (j > i+1 && nums[j] == nums[j-1]){
                     continue;
                 }
-                int low = j+1;
-                int high = n-1;
-
-                while (low < high){
-                    long long sum = (long long)nums[i] + nums[j] + nums[low] + nums[high];
+                int left = j+1;
+                int right = n-1;
+                while (left < right){
+                    long long sum = (long long)nums[i] + nums[j] + nums[left] + nums[right];
                     if (sum == target){
-                        ans.push_back({nums[i], nums[j], nums[low], nums[high]});
-                        while (low < high && nums[low+1] == nums[low]){
-                            low++;
+                        ans.push_back({nums[i], nums[j], nums[left], nums[right]});
+                        while (left < right && nums[left+1] == nums[left]){
+                            left++;
                         }
-                        while (low < high && nums[high-1] == nums[high]){
-                            high--;
+                        while (left < right && nums[right] == nums[right-1]){
+                            right--;
                         }
-                        low += 1;
-                        high -= 1;
+                        left++;
+                        right--;
                     }
                     else if (sum < target){
-                        low += 1;
+                        left++;
                     }
                     else if (sum > target){
-                        high -= 1;
+                        right--;
                     }
-                    
                 }
             }
         }
