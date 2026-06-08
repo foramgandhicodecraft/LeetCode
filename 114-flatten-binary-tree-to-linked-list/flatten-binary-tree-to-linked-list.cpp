@@ -12,24 +12,21 @@
 class Solution {
 public:
     void flatten(TreeNode* root) {
-        // iterative solution
+        // recursive solution
 
-        if (!root) return;
-        stack<TreeNode*>st;
-        
-        st.push(root);
+        TreeNode* prev = nullptr;
+        return flat(root, prev);
+    }
 
-        while (!st.empty()){
-            TreeNode* current = st.top();
-            st.pop();
-            if (current->right) st.push(current->right);
-            if (current->left) st.push(current->left);
-            if (!st.empty()){
-                current->right = st.top();
-            }
-            current->left = nullptr;
-        }
+    void flat(TreeNode* root, TreeNode*& prev) {
 
-        
+        if (root == nullptr) return;
+
+        flat(root->right, prev);
+        flat(root->left, prev);
+
+        root->right = prev;
+        root->left = nullptr;
+        prev = root;
     }
 };
