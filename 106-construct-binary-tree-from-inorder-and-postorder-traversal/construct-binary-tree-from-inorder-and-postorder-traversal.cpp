@@ -12,35 +12,28 @@
 class Solution {
 public:
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-        if (inorder.size() != postorder.size()) return nullptr;
-
-        map<int, int> inorderInx;
+        unordered_map<int, int>inorderIdx;
 
         for (int i = 0; i < inorder.size(); i++){
-            inorderInx[inorder[i]] = i;
+            inorderIdx[inorder[i]] = i;
         }
 
-        return f (0, inorder.size()-1, inorderInx, 0, postorder.size()-1, inorder, postorder);
-
+        return f(inorderIdx, 0, inorder.size()-1, 0, postorder.size()-1, inorder, postorder);
     }
 
-private:
-    TreeNode* f (int ins, int ine, map<int, int> &inorderInx, int ps, int pe, vector<int>& inorder, vector<int>& postorder){
-        if (ins > ine || ps > pe){
+    TreeNode* f(unordered_map<int, int>&inorderIdx, int is, int ie, int ps, int pe, vector<int>& inorder, vector<int>& postorder) {
+        if (is > ie || ps > pe){
             return nullptr;
         }
 
-        int val = postorder[pe];
+        int value = postorder[pe];
+        TreeNode* root = new TreeNode(value);
+        int inorderRoot = inorderIdx[value];
 
-        TreeNode* root = new TreeNode(val);
+        int numsLeft = inorderRoot - is;
 
-        int inorder_lookup = inorderInx[val];
-
-        int numsLeft = inorder_lookup - ins;
-
-        root->left = f (ins, inorder_lookup-1, inorderInx, ps, ps+numsLeft-1, inorder, postorder);
-
-        root->right = f (inorder_lookup+1, ine, inorderInx, ps+numsLeft,pe-1, inorder, postorder);
+        root->left = f(inorderIdx, is, inorderRoot-1, ps, ps+numsLeft-1, inorder, postorder);
+        root->right = f(inorderIdx, inorderRoot+1, ie, ps+numsLeft, pe-1, inorder, postorder);
 
         return root;
     }
