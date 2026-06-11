@@ -16,10 +16,6 @@ public:
         vector<int>inorder;
         construct(inorder, root);
 
-        for (int i = 0; i < inorder.size(); i++){
-            cout<<inorder[i];
-        }
-
         for (int i = 0; i < inorder.size()-1; i++){
             if (inorder[i] >= inorder[i+1]){
                 return false;
