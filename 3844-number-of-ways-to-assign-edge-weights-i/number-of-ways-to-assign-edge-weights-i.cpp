@@ -1,16 +1,19 @@
 class Solution {
 public:
 
-   static const int MOD = 1'000'000'007;
+    long long MOD = 1e9+7;
 
-    long long power(long long base, long long exp, long long mod) {
-        long long result = 1;
-        base %= mod;
-        while (exp > 0) {
-            if (exp & 1) result = result * base % mod;
-            base = base * base % mod;
-            exp >>= 1;
+    long long power(long long base, long long exp) {
+        if (exp == 0){
+            return 1;
         }
+        long long half = power(base, exp/2);
+        long long result = (half*half)%MOD;
+
+        if (exp%2 != 0){
+            result = (result*base) % MOD;
+        }
+
         return result;
     }
 
@@ -36,6 +39,6 @@ public:
 
         int d = getDepth(adj, 1, -1);
 
-        return power(2, d-1, MOD);
+        return power(2, d-1);
     }
 };
